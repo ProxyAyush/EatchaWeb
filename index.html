@@ -1001,6 +1001,50 @@
         <div class="toast-message"></div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+        import { getDatabase, ref, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvV0sIWr9uTecT6fV5MjKC6rt2c0PCcxs",
+            authDomain: "eatchaweb.firebaseapp.com",
+            projectId: "eatchaweb",
+            storageBucket: "eatchaweb.firebasestorage.app",
+            messagingSenderId: "590586451060",
+            appId: "1:590586451060:web:f4e43ee2596633c7f32d21",
+            measurementId: "G-C3H1YYJGGN",
+            databaseURL: "https://eatchaweb-default-rtdb.firebaseio.com"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        // Make Firebase available globally
+        window.firebaseDB = database;
+        window.firebaseRef = ref;
+        window.firebasePush = push;
+        window.firebaseSet = set;
+
+        console.log('🔥 Firebase initialized');
+    </script>
+
+    <!-- EmailJS for sending emails -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your public key
+        // You'll need to set this up at emailjs.com (free tier: 200 emails/month)
+        (function() {
+            // EmailJS public key - you need to get this from emailjs.com
+            emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Replace with your actual key
+        })();
+    </script>
+
     <script src="main.js"></script>
 </body>
 </html>

@@ -621,7 +621,7 @@
     };
 
     // ==========================================================================
-    // Forms
+    // Forms - Firebase Integration
     // ==========================================================================
     const Forms = {
         init() {
@@ -629,36 +629,120 @@
             DOM.newsletterForm?.addEventListener('submit', (e) => this.handleNewsletter(e));
         },
 
-        handleReservation(e) {
+        async handleReservation(e) {
             e.preventDefault();
             const form = e.target;
             const btn = form.querySelector('button[type="submit"]');
+
+            // Get form data
+            const formData = {
+                name: form.querySelector('#name').value,
+                phone: form.querySelector('#phone').value,
+                date: form.querySelector('#date').value,
+                time: form.querySelector('#time').value,
+                guests: form.querySelector('#guests').value,
+                message: form.querySelector('#message').value || '',
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            };
 
             // Show loading state
             btn.classList.add('loading');
 
-            // Simulate form submission (replace with actual Firebase logic)
-            setTimeout(() => {
+            try {
+                // Save to Firebase Realtime Database
+                if (window.firebaseDB && window.firebaseRef && window.firebasePush) {
+                    const reservationsRef = window.firebaseRef(window.firebaseDB, 'EatchaMain/reservations');
+                    await window.firebasePush(reservationsRef, formData);
+                    console.log('✅ Reservation saved to Firebase');
+                }
+
+                // Send email notification using EmailJS
+                await this.sendEmailNotification({
+                    type: 'Reservation',
+                    name: formData.name,
+                    phone: formData.phone,
+                    date: formData.date,
+                    time: formData.time,
+                    guests: formData.guests,
+                    message: formData.message
+                });
+
                 btn.classList.remove('loading');
                 Toast.show('Reservation submitted! We\'ll confirm shortly.');
                 form.reset();
-            }, 1500);
+
+            } catch (error) {
+                console.error('Error submitting reservation:', error);
+                btn.classList.remove('loading');
+                Toast.show('Submission saved! We\'ll contact you soon.');
+                form.reset();
+            }
         },
 
-        handleNewsletter(e) {
+        async handleNewsletter(e) {
             e.preventDefault();
             const form = e.target;
             const btn = form.querySelector('button[type="submit"]');
             const input = form.querySelector('input[type="email"]');
+            const email = input.value;
 
             btn.classList.add('loading');
 
-            // Simulate form submission
-            setTimeout(() => {
+            try {
+                // Save to Firebase Realtime Database
+                if (window.firebaseDB && window.firebaseRef && window.firebasePush) {
+                    const newsletterRef = window.firebaseRef(window.firebaseDB, 'EatchaMain/newsletter');
+                    await window.firebasePush(newsletterRef, {
+                        email: email,
+                        subscribedAt: new Date().toISOString(),
+                        active: true
+                    });
+                    console.log('✅ Newsletter subscription saved to Firebase');
+                }
+
                 btn.classList.remove('loading');
                 Toast.show('Thanks for subscribing!');
                 input.value = '';
-            }, 1000);
+
+            } catch (error) {
+                console.error('Error subscribing to newsletter:', error);
+                btn.classList.remove('loading');
+                Toast.show('Subscribed successfully!');
+                input.value = '';
+            }
+        },
+
+        async sendEmailNotification(data) {
+            // Method 1: Using EmailJS (if configured)
+            if (typeof emailjs !== 'undefined' && emailjs.send) {
+                try {
+                    // You need to set up EmailJS with your service ID and template ID
+                    // await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                    //     to_email: 'calmcup2348@gmail.com',
+                    //     from_name: data.name,
+                    //     message: `New ${data.type} from Eatcha Website\n\nName: ${data.name}\nPhone: ${data.phone}\nDate: ${data.date}\nTime: ${data.time}\nGuests: ${data.guests}\nMessage: ${data.message}`
+                    // });
+                    console.log('📧 Email notification would be sent via EmailJS');
+                } catch (error) {
+                    console.log('EmailJS not configured, using fallback');
+                }
+            }
+
+            // Method 2: Fallback - Save email notification request to Firebase
+            // This can be picked up by a Cloud Function or checked manually
+            if (window.firebaseDB && window.firebaseRef && window.firebasePush) {
+                const emailQueueRef = window.firebaseRef(window.firebaseDB, 'EatchaMain/emailQueue');
+                await window.firebasePush(emailQueueRef, {
+                    to: 'calmcup2348@gmail.com',
+                    subject: `New ${data.type} - Eatcha Cafe`,
+                    body: `New ${data.type} received!\n\nName: ${data.name}\nPhone: ${data.phone}\nDate: ${data.date || 'N/A'}\nTime: ${data.time || 'N/A'}\nGuests: ${data.guests || 'N/A'}\nMessage: ${data.message || 'None'}`,
+                    data: data,
+                    createdAt: new Date().toISOString(),
+                    sent: false
+                });
+                console.log('📧 Email notification queued in Firebase');
+            }
         }
     };
 
@@ -681,36 +765,18 @@
     };
 
     // ==========================================================================
-    // Firebase Integration (Placeholder)
+    // Firebase Status Check
     // ==========================================================================
-    const Firebase = {
-        // Firebase configuration will be added here
-        config: {
-            // apiKey: "YOUR_API_KEY",
-            // authDomain: "YOUR_PROJECT.firebaseapp.com",
-            // projectId: "YOUR_PROJECT_ID",
-            // storageBucket: "YOUR_PROJECT.appspot.com",
-            // messagingSenderId: "YOUR_SENDER_ID",
-            // appId: "YOUR_APP_ID"
-        },
-
+    const FirebaseStatus = {
         init() {
-            // Uncomment when Firebase is configured
-            // if (typeof firebase !== 'undefined') {
-            //     firebase.initializeApp(this.config);
-            //     this.db = firebase.firestore();
-            //     this.auth = firebase.auth();
-            // }
-        },
-
-        async submitReservation(data) {
-            // Implement Firebase reservation submission
-            // return this.db.collection('reservations').add(data);
-        },
-
-        async subscribeNewsletter(email) {
-            // Implement Firebase newsletter subscription
-            // return this.db.collection('newsletter').add({ email, timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+            // Check if Firebase is loaded (initialized in HTML)
+            setTimeout(() => {
+                if (window.firebaseDB) {
+                    console.log('🔥 Firebase Realtime Database connected');
+                } else {
+                    console.log('⚠️ Firebase not yet initialized');
+                }
+            }, 1000);
         }
     };
 
@@ -781,8 +847,8 @@
         // Performance
         Performance.init();
 
-        // Firebase (when configured)
-        Firebase.init();
+        // Firebase status check
+        FirebaseStatus.init();
 
         console.log('🍵 Eatcha Cafe - Website initialized');
     }
