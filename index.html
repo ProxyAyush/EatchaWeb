@@ -24,9 +24,29 @@
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
 
-    <!-- Loading Screen -->
+    <!-- Loading Screen with 3D Coffee Cup Animation -->
     <div class="loader" id="loader">
         <div class="loader-content">
+            <div class="coffee-cup-container">
+                <div class="coffee-cup">
+                    <div class="cup-body">
+                        <div class="coffee-liquid">
+                            <div class="coffee-wave"></div>
+                        </div>
+                        <div class="cream-art">
+                            <div class="cream-swirl"></div>
+                            <div class="cream-heart"></div>
+                        </div>
+                    </div>
+                    <div class="cup-handle"></div>
+                    <div class="cup-saucer"></div>
+                    <div class="steam">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
             <div class="loader-logo">
                 <span class="loader-letter" style="--i:0">e</span>
                 <span class="loader-letter" style="--i:1">a</span>
@@ -115,6 +135,8 @@
         <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="hero-bg">
+                <div class="hero-bg-image" style="background-image: url('IMG_9574.jpg');"></div>
+                <div class="hero-bg-overlay"></div>
                 <div class="hero-parallax-layer layer-1"></div>
                 <div class="hero-parallax-layer layer-2"></div>
                 <div class="hero-parallax-layer layer-3"></div>
@@ -389,7 +411,7 @@
 
                     <div class="menu-item animate-on-scroll" data-category="beverages" style="--delay: 0.2s">
                         <div class="menu-item-image">
-                            <img src="9AA519A1-66B3-43C6-A90F-DFF7D43FA0C1.JPG" alt="S'mores Latte">
+                            <img src="C9FD3129-B6CE-4A2E-B712-A8196C0DC6BA.JPG" alt="S'mores Latte">
                             <div class="menu-item-overlay">
                                 <span class="menu-item-tag">Bestseller</span>
                             </div>
@@ -403,6 +425,26 @@
                             <div class="menu-item-tags">
                                 <span>🔥 Toasted</span>
                                 <span>🍫 Indulgent</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item animate-on-scroll" data-category="beverages" style="--delay: 0.22s">
+                        <div class="menu-item-image">
+                            <img src="E558CCD9-52DD-436F-A550-A752C69F0211.JPG" alt="Tiramisu Latte">
+                            <div class="menu-item-overlay">
+                                <span class="menu-item-tag">New</span>
+                            </div>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Tiramisu Latte</h3>
+                                <span class="menu-item-price">₹260</span>
+                            </div>
+                            <p>Espresso with mascarpone cream, cocoa dust, and a slice of tiramisu cake</p>
+                            <div class="menu-item-tags">
+                                <span>☕ Coffee</span>
+                                <span>🍰 Decadent</span>
                             </div>
                         </div>
                     </div>
@@ -637,7 +679,72 @@
                     </div>
 
                     <div class="gallery-item animate-on-scroll" style="--delay: 0.45s">
-                        <img src="AC37F370-7049-4B3C-810B-7EABDB848D41.JPG" alt="Menu Cards">
+                        <img src="C9FD3129-B6CE-4A2E-B712-A8196C0DC6BA.JPG" alt="S'mores Latte">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.5s">
+                        <img src="9AA519A1-66B3-43C6-A90F-DFF7D43FA0C1.JPG" alt="Cafe Spread">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.55s">
+                        <img src="E558CCD9-52DD-436F-A550-A752C69F0211.JPG" alt="Tiramisu Latte">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.6s">
+                        <img src="77B7B96D-AE0A-4268-B8EA-BB769C2E9238.JPG" alt="Food Platter">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.65s">
+                        <img src="907E237C-F709-4932-A154-364CE0D9C298.JPG" alt="Matcha Drinks">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.7s">
+                        <img src="B4CFAC76-A7E4-472A-B732-A562AC922A3E.JPG" alt="Honey Toast">
                         <div class="gallery-overlay">
                             <span class="gallery-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

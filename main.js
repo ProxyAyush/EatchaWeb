@@ -184,12 +184,12 @@
             document.body.classList.add('loading');
 
             window.addEventListener('load', () => {
-                setTimeout(() => this.hide(), 2500);
+                setTimeout(() => this.hide(), 2000);
             });
 
             // Fallback if load event already fired
             if (document.readyState === 'complete') {
-                setTimeout(() => this.hide(), 2500);
+                setTimeout(() => this.hide(), 2000);
             }
         },
 
