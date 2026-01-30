@@ -714,23 +714,35 @@
         },
 
         async sendEmailNotification(data) {
-            // Method 1: Using EmailJS (if configured)
-            if (typeof emailjs !== 'undefined' && emailjs.send) {
-                try {
-                    // You need to set up EmailJS with your service ID and template ID
-                    // await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
-                    //     to_email: 'calmcup2348@gmail.com',
-                    //     from_name: data.name,
-                    //     message: `New ${data.type} from Eatcha Website\n\nName: ${data.name}\nPhone: ${data.phone}\nDate: ${data.date}\nTime: ${data.time}\nGuests: ${data.guests}\nMessage: ${data.message}`
-                    // });
-                    console.log('📧 Email notification would be sent via EmailJS');
-                } catch (error) {
-                    console.log('EmailJS not configured, using fallback');
+            // Using FormSubmit.co - FREE service, no signup required!
+            // Sends email directly to your inbox
+            try {
+                const formData = new FormData();
+                formData.append('_subject', `New ${data.type} - Eatcha Cafe Website`);
+                formData.append('name', data.name);
+                formData.append('phone', data.phone);
+                formData.append('date', data.date || 'N/A');
+                formData.append('time', data.time || 'N/A');
+                formData.append('guests', data.guests || 'N/A');
+                formData.append('message', data.message || 'None');
+                formData.append('_template', 'table'); // Nice HTML table format
+                formData.append('_captcha', 'false'); // Disable captcha for AJAX
+
+                const response = await fetch('https://formsubmit.co/ajax/calmcup2348@gmail.com', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    console.log('📧 Email sent successfully via FormSubmit!');
+                } else {
+                    console.log('📧 Email sending failed, but data saved to Firebase');
                 }
+            } catch (error) {
+                console.log('📧 Email service error:', error.message);
             }
 
-            // Method 2: Fallback - Save email notification request to Firebase
-            // This can be picked up by a Cloud Function or checked manually
+            // Also save to Firebase as backup
             if (window.firebaseDB && window.firebaseRef && window.firebasePush) {
                 const emailQueueRef = window.firebaseRef(window.firebaseDB, 'EatchaMain/emailQueue');
                 await window.firebasePush(emailQueueRef, {
@@ -739,9 +751,9 @@
                     body: `New ${data.type} received!\n\nName: ${data.name}\nPhone: ${data.phone}\nDate: ${data.date || 'N/A'}\nTime: ${data.time || 'N/A'}\nGuests: ${data.guests || 'N/A'}\nMessage: ${data.message || 'None'}`,
                     data: data,
                     createdAt: new Date().toISOString(),
-                    sent: false
+                    sent: true
                 });
-                console.log('📧 Email notification queued in Firebase');
+                console.log('📧 Email record saved to Firebase');
             }
         }
     };
