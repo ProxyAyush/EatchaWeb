@@ -1,13 +1,1041 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eatcha Cafe</title>
-    <script type="module" crossorigin src="./assets/index-CFsVwgSe.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B4E4A5nr.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Eatcha Cafe - Where every bite tells a story. Experience artisanal coffee, matcha lattes, and freshly baked goods in a cozy minimalist setting.">
+    <meta name="keywords" content="cafe, coffee, matcha, latte, croissant, bakery, korean food, japanese cafe">
+    <meta name="theme-color" content="#2C1810">
+
+    <title>Eatcha Cafe | Artisan Coffee & Bakes</title>
+
+    <!-- Preload critical assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <span class="loader-letter" style="--i:0">e</span>
+                <span class="loader-letter" style="--i:1">a</span>
+                <span class="loader-letter" style="--i:2">t</span>
+                <span class="loader-letter" style="--i:3">c</span>
+                <span class="loader-letter" style="--i:4">h</span>
+                <span class="loader-letter" style="--i:5">a</span>
+            </div>
+            <div class="loader-tagline">crafting moments</div>
+            <div class="loader-progress">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+        <div class="loader-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <a href="#home" class="nav-logo">
+                <span class="logo-text">eatcha</span>
+                <span class="logo-dot"></span>
+            </a>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="nav-link active" data-text="Home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-text="About">About</a></li>
+                <li><a href="#menu" class="nav-link" data-text="Menu">Menu</a></li>
+                <li><a href="#gallery" class="nav-link" data-text="Gallery">Gallery</a></li>
+                <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="#reserve" class="btn btn-primary nav-cta">
+                    <span>Reserve</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-bg"></div>
+        <div class="mobile-menu-content">
+            <ul class="mobile-nav-links">
+                <li style="--i:0"><a href="#home">Home</a></li>
+                <li style="--i:1"><a href="#about">About</a></li>
+                <li style="--i:2"><a href="#menu">Menu</a></li>
+                <li style="--i:3"><a href="#gallery">Gallery</a></li>
+                <li style="--i:4"><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-footer">
+                <a href="#reserve" class="btn btn-primary">Reserve a Table</a>
+                <div class="mobile-social">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5"/>
+                            <circle cx="12" cy="12" r="4"/>
+                            <circle cx="18" cy="6" r="1.5" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-bg">
+                <div class="hero-parallax-layer layer-1"></div>
+                <div class="hero-parallax-layer layer-2"></div>
+                <div class="hero-parallax-layer layer-3"></div>
+            </div>
+
+            <div class="hero-particles" id="hero-particles"></div>
+
+            <div class="hero-content">
+                <div class="hero-badge animate-on-scroll">
+                    <span class="badge-icon">☕</span>
+                    <span>Est. 2023 • Imphal, Manipur</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="title-line animate-on-scroll" style="--delay: 0.1s">
+                        <span class="title-word">Where</span>
+                        <span class="title-word">every</span>
+                    </span>
+                    <span class="title-line animate-on-scroll" style="--delay: 0.2s">
+                        <span class="title-word accent">bite</span>
+                        <span class="title-word">tells</span>
+                        <span class="title-word">a</span>
+                    </span>
+                    <span class="title-line animate-on-scroll" style="--delay: 0.3s">
+                        <span class="title-word script">story</span>
+                    </span>
+                </h1>
+
+                <p class="hero-description animate-on-scroll" style="--delay: 0.4s">
+                    Artisan coffee, handcrafted matcha lattes, and freshly baked delights
+                    in a cozy minimalist haven. Every cup is a journey, every bite a memory.
+                </p>
+
+                <div class="hero-cta animate-on-scroll" style="--delay: 0.5s">
+                    <a href="#menu" class="btn btn-primary btn-lg">
+                        <span>Explore Menu</span>
+                        <div class="btn-shine"></div>
+                    </a>
+                    <a href="#about" class="btn btn-outline btn-lg">
+                        <span>Our Story</span>
+                    </a>
+                </div>
+
+                <div class="hero-scroll-indicator animate-on-scroll" style="--delay: 0.6s">
+                    <div class="scroll-mouse">
+                        <div class="scroll-wheel"></div>
+                    </div>
+                    <span>Scroll to explore</span>
+                </div>
+            </div>
+
+            <div class="hero-image-showcase">
+                <div class="showcase-card showcase-card-1 animate-on-scroll" style="--delay: 0.3s">
+                    <img src="IMG_8243.PNG" alt="Matcha Latte" loading="eager">
+                    <div class="showcase-overlay">
+                        <span>Matcha Latte</span>
+                    </div>
+                </div>
+                <div class="showcase-card showcase-card-2 animate-on-scroll" style="--delay: 0.4s">
+                    <img src="IMG_9574.jpg" alt="Coffee and Pastries" loading="eager">
+                    <div class="showcase-overlay">
+                        <span>Fresh Daily</span>
+                    </div>
+                </div>
+                <div class="showcase-card showcase-card-3 animate-on-scroll" style="--delay: 0.5s">
+                    <img src="IMG_8245.PNG" alt="Red Velvet Cookies" loading="eager">
+                    <div class="showcase-overlay">
+                        <span>Baked Fresh</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-floating-elements">
+                <div class="float-element float-coffee">☕</div>
+                <div class="float-element float-leaf">🍃</div>
+                <div class="float-element float-sparkle">✨</div>
+            </div>
+        </section>
+
+        <!-- Marquee Section -->
+        <section class="marquee-section">
+            <div class="marquee">
+                <div class="marquee-content">
+                    <span>Artisan Coffee</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Matcha Lattes</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Fresh Croissants</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Korean Bites</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Homemade Cookies</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Cozy Vibes</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Artisan Coffee</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Matcha Lattes</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Fresh Croissants</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Korean Bites</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Homemade Cookies</span>
+                    <span class="marquee-dot">◆</span>
+                    <span>Cozy Vibes</span>
+                    <span class="marquee-dot">◆</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-images">
+                        <div class="about-image-main animate-on-scroll">
+                            <img src="View recent photos 2.png" alt="Eatcha Cafe Interior">
+                            <div class="image-frame"></div>
+                        </div>
+                        <div class="about-image-secondary animate-on-scroll" style="--delay: 0.2s">
+                            <img src="D80C55E1-1B71-481D-8BD8-8C8609F50B3B.JPG" alt="Coffee Service">
+                        </div>
+                        <div class="about-floating-card animate-on-scroll" style="--delay: 0.3s">
+                            <div class="floating-card-content">
+                                <span class="floating-number">500+</span>
+                                <span class="floating-text">Happy Customers Weekly</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-content">
+                        <div class="section-label animate-on-scroll">
+                            <span class="label-line"></span>
+                            <span>Our Story</span>
+                        </div>
+
+                        <h2 class="about-title animate-on-scroll" style="--delay: 0.1s">
+                            A <span class="text-accent">passion</span> brewed<br>
+                            into <span class="text-script">perfection</span>
+                        </h2>
+
+                        <div class="about-text animate-on-scroll" style="--delay: 0.2s">
+                            <p>
+                                Eatcha was born from a simple dream — to create a space where people
+                                could slow down, savor quality, and connect over exceptional food and drinks.
+                            </p>
+                            <p>
+                                Every recipe carries a story, inspired by travels across Japan and Korea,
+                                blended with the warmth of local hospitality. From our signature matcha lattes
+                                to our freshly baked red velvet cookies, each creation is crafted with love.
+                            </p>
+                        </div>
+
+                        <div class="about-features animate-on-scroll" style="--delay: 0.3s">
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Premium Ingredients</h4>
+                                    <p>Sourced with care</p>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 6v6l4 2"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Made Fresh Daily</h4>
+                                    <p>From our kitchen to you</p>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Crafted with Love</h4>
+                                    <p>In every detail</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#menu" class="btn btn-primary animate-on-scroll" style="--delay: 0.4s">
+                            <span>Discover Our Menu</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-bg-elements">
+                <div class="bg-circle bg-circle-1"></div>
+                <div class="bg-circle bg-circle-2"></div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu" id="menu">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label animate-on-scroll">
+                        <span class="label-line"></span>
+                        <span>Our Menu</span>
+                    </div>
+                    <h2 class="section-title animate-on-scroll" style="--delay: 0.1s">
+                        Crafted for your <span class="text-script">delight</span>
+                    </h2>
+                    <p class="section-subtitle animate-on-scroll" style="--delay: 0.2s">
+                        From signature beverages to freshly baked treats, every item is made with passion
+                    </p>
+                </div>
+
+                <div class="menu-categories animate-on-scroll" style="--delay: 0.3s">
+                    <button class="menu-category active" data-category="all">All</button>
+                    <button class="menu-category" data-category="beverages">Beverages</button>
+                    <button class="menu-category" data-category="food">Food</button>
+                    <button class="menu-category" data-category="desserts">Desserts</button>
+                </div>
+
+                <div class="menu-grid">
+                    <!-- Beverages -->
+                    <div class="menu-item animate-on-scroll" data-category="beverages" style="--delay: 0.1s">
+                        <div class="menu-item-image">
+                            <img src="IMG_8243.PNG" alt="Matcha Latte">
+                            <div class="menu-item-overlay">
+                                <span class="menu-item-tag">Popular</span>
+                            </div>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Matcha Latte</h3>
+                                <span class="menu-item-price">₹220</span>
+                            </div>
+                            <p>Premium ceremonial grade matcha whisked to perfection with your choice of milk</p>
+                            <div class="menu-item-tags">
+                                <span>🍵 Signature</span>
+                                <span>🥛 Oat milk option</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item animate-on-scroll" data-category="beverages" style="--delay: 0.15s">
+                        <div class="menu-item-image">
+                            <img src="IMG_8244.PNG" alt="Strawberry Matcha">
+                            <div class="menu-item-overlay">
+                                <span class="menu-item-tag">New</span>
+                            </div>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Strawberry Matcha</h3>
+                                <span class="menu-item-price">₹250</span>
+                            </div>
+                            <p>Vibrant, foamy, and dreamy - a beautiful fusion of strawberry and matcha</p>
+                            <div class="menu-item-tags">
+                                <span>🍓 Fruity</span>
+                                <span>📸 Instagrammable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item animate-on-scroll" data-category="beverages" style="--delay: 0.2s">
+                        <div class="menu-item-image">
+                            <img src="9AA519A1-66B3-43C6-A90F-DFF7D43FA0C1.JPG" alt="S'mores Latte">
+                            <div class="menu-item-overlay">
+                                <span class="menu-item-tag">Bestseller</span>
+                            </div>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>S'mores Latte</h3>
+                                <span class="menu-item-price">₹280</span>
+                            </div>
+                            <p>Toasted marshmallows, rich chocolate, and espresso topped with a Biscoff cookie</p>
+                            <div class="menu-item-tags">
+                                <span>🔥 Toasted</span>
+                                <span>🍫 Indulgent</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Food -->
+                    <div class="menu-item animate-on-scroll" data-category="food" style="--delay: 0.25s">
+                        <div class="menu-item-image">
+                            <img src="IMG_9574.jpg" alt="Croissant">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Butter Croissant</h3>
+                                <span class="menu-item-price">₹150</span>
+                            </div>
+                            <p>Flaky, buttery layers of perfection baked fresh every morning</p>
+                            <div class="menu-item-tags">
+                                <span>🥐 Classic</span>
+                                <span>🌅 Breakfast</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item animate-on-scroll" data-category="food" style="--delay: 0.3s">
+                        <div class="menu-item-image">
+                            <img src="3BE27EA4-D58C-498B-A4FC-FC935D55594A.JPG" alt="Kimchi Fried Rice">
+                            <div class="menu-item-overlay">
+                                <span class="menu-item-tag">Chef's Special</span>
+                            </div>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Kimchi Fried Rice</h3>
+                                <span class="menu-item-price">₹320</span>
+                            </div>
+                            <p>Authentic Korean bokkeumbap with homemade kimchi, sesame, and green onions</p>
+                            <div class="menu-item-tags">
+                                <span>🌶️ Spicy</span>
+                                <span>🍚 Hearty</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item animate-on-scroll" data-category="food" style="--delay: 0.35s">
+                        <div class="menu-item-image">
+                            <img src="77B7B96D-AE0A-4268-B8EA-BB769C2E9238.JPG" alt="Japchae">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Japchae Platter</h3>
+                                <span class="menu-item-price">₹350</span>
+                            </div>
+                            <p>Sweet potato glass noodles with vegetables and savory sesame sauce</p>
+                            <div class="menu-item-tags">
+                                <span>🍜 Korean</span>
+                                <span>🥬 Veggie</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desserts -->
+                    <div class="menu-item animate-on-scroll" data-category="desserts" style="--delay: 0.4s">
+                        <div class="menu-item-image">
+                            <img src="IMG_8245.PNG" alt="Red Velvet Cookies">
+                            <div class="menu-item-overlay">
+                                <span class="menu-item-tag">House Made</span>
+                            </div>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Red Velvet Cookies</h3>
+                                <span class="menu-item-price">₹120</span>
+                            </div>
+                            <p>In-house freshly baked with dark chocolate and white chocolate chips</p>
+                            <div class="menu-item-tags">
+                                <span>🍪 Fresh</span>
+                                <span>❤️ Signature</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item animate-on-scroll" data-category="desserts" style="--delay: 0.45s">
+                        <div class="menu-item-image">
+                            <img src="9AA519A1-66B3-43C6-A90F-DFF7D43FA0C1.JPG" alt="Strawberry Toast">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Strawberry Toast</h3>
+                                <span class="menu-item-price">₹280</span>
+                            </div>
+                            <p>Thick toast topped with fresh strawberries, cream, and a drizzle of sauce</p>
+                            <div class="menu-item-tags">
+                                <span>🍓 Fresh</span>
+                                <span>🍞 Thick Cut</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item animate-on-scroll" data-category="desserts" style="--delay: 0.5s">
+                        <div class="menu-item-image">
+                            <img src="77B7B96D-AE0A-4268-B8EA-BB769C2E9238.JPG" alt="Tiramisu">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3>Classic Tiramisu</h3>
+                                <span class="menu-item-price">₹250</span>
+                            </div>
+                            <p>Layers of coffee-soaked ladyfingers with mascarpone and cocoa</p>
+                            <div class="menu-item-tags">
+                                <span>☕ Coffee</span>
+                                <span>🇮🇹 Italian</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-cta animate-on-scroll">
+                    <a href="#" class="btn btn-outline btn-lg">
+                        <span>View Full Menu</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="menu-bg-pattern"></div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery" id="gallery">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label animate-on-scroll">
+                        <span class="label-line"></span>
+                        <span>Gallery</span>
+                    </div>
+                    <h2 class="section-title animate-on-scroll" style="--delay: 0.1s">
+                        Moments at <span class="text-script">Eatcha</span>
+                    </h2>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item gallery-item-large animate-on-scroll" style="--delay: 0.1s">
+                        <img src="IMG_9574.jpg" alt="Coffee and Pastries">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.15s">
+                        <img src="IMG_8243.PNG" alt="Matcha Latte">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.2s">
+                        <img src="cad17eb8-5b73-4c6e-a557-3574e9dfc32e.JPG" alt="Cafe Shelf">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.25s">
+                        <img src="D80C55E1-1B71-481D-8BD8-8C8609F50B3B.JPG" alt="Drinks Tray">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item gallery-item-tall animate-on-scroll" style="--delay: 0.3s">
+                        <img src="IMG_8244.PNG" alt="Strawberry Matcha">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.35s">
+                        <img src="3BE27EA4-D58C-498B-A4FC-FC935D55594A.JPG" alt="Fried Rice">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.4s">
+                        <img src="IMG_8245.PNG" alt="Cookies">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item animate-on-scroll" style="--delay: 0.45s">
+                        <img src="AC37F370-7049-4B3C-810B-7EABDB848D41.JPG" alt="Menu Cards">
+                        <div class="gallery-overlay">
+                            <span class="gallery-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label animate-on-scroll">
+                        <span class="label-line"></span>
+                        <span>Reviews</span>
+                    </div>
+                    <h2 class="section-title animate-on-scroll" style="--delay: 0.1s">
+                        What people are <span class="text-script">saying</span>
+                    </h2>
+                </div>
+
+                <div class="testimonials-slider animate-on-scroll" style="--delay: 0.2s">
+                    <div class="testimonials-track" id="testimonials-track">
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-text">
+                                "The matcha latte here is absolutely divine! The atmosphere is so cozy
+                                and the staff is incredibly friendly. My new favorite spot in Imphal!"
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">S</div>
+                                <div class="author-info">
+                                    <h4>Sanjana M.</h4>
+                                    <span>Regular Customer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-text">
+                                "Finally a cafe that does Korean food right! The kimchi fried rice
+                                transported me back to Seoul. The s'mores latte is a must-try!"
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">R</div>
+                                <div class="author-info">
+                                    <h4>Rahul T.</h4>
+                                    <span>Food Blogger</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-text">
+                                "Best croissants in town, hands down! The minimalist decor is perfect
+                                for both work and casual hangouts. Love the attention to detail."
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">P</div>
+                                <div class="author-info">
+                                    <h4>Priya K.</h4>
+                                    <span>Designer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-text">
+                                "Those red velvet cookies are addictive! Fresh, chunky, and absolutely
+                                delicious. The Biscoff with every drink is a nice touch."
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">A</div>
+                                <div class="author-info">
+                                    <h4>Anika D.</h4>
+                                    <span>Student</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonials-nav">
+                        <button class="testimonial-nav-btn prev" id="testimonial-prev" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <div class="testimonial-dots" id="testimonial-dots"></div>
+                        <button class="testimonial-nav-btn next" id="testimonial-next" aria-label="Next">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="section-label animate-on-scroll">
+                            <span class="label-line"></span>
+                            <span>Visit Us</span>
+                        </div>
+
+                        <h2 class="contact-title animate-on-scroll" style="--delay: 0.1s">
+                            Come say <span class="text-script">hello</span>
+                        </h2>
+
+                        <div class="contact-details animate-on-scroll" style="--delay: 0.2s">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                                        <circle cx="12" cy="10" r="3"/>
+                                    </svg>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Location</h4>
+                                    <p>Keishampat, Imphal<br>Manipur, India 795001</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 6v6l4 2"/>
+                                    </svg>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Hours</h4>
+                                    <p>Mon - Sat: 10AM - 9PM<br>Sunday: 11AM - 8PM</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                                    </svg>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Contact</h4>
+                                    <p>+91 98765 43210<br>hello@eatcha.cafe</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-social animate-on-scroll" style="--delay: 0.3s">
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="2" width="20" height="20" rx="5"/>
+                                    <circle cx="12" cy="12" r="4"/>
+                                    <circle cx="18" cy="6" r="1.5" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link whatsapp" aria-label="WhatsApp">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-wrapper animate-on-scroll" style="--delay: 0.2s" id="reserve">
+                        <div class="contact-form-card">
+                            <h3>Reserve a Table</h3>
+                            <p>Book your spot for a memorable experience</p>
+
+                            <form class="contact-form" id="reservation-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <input type="text" id="name" name="name" required placeholder=" ">
+                                        <label for="name">Your Name</label>
+                                        <span class="form-line"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="tel" id="phone" name="phone" required placeholder=" ">
+                                        <label for="phone">Phone Number</label>
+                                        <span class="form-line"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <input type="date" id="date" name="date" required placeholder=" ">
+                                        <label for="date">Date</label>
+                                        <span class="form-line"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="time" id="time" name="time" required placeholder=" ">
+                                        <label for="time">Time</label>
+                                        <span class="form-line"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <select id="guests" name="guests" required>
+                                        <option value="" disabled selected></option>
+                                        <option value="1">1 Person</option>
+                                        <option value="2">2 People</option>
+                                        <option value="3">3 People</option>
+                                        <option value="4">4 People</option>
+                                        <option value="5+">5+ People</option>
+                                    </select>
+                                    <label for="guests">Number of Guests</label>
+                                    <span class="form-line"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea id="message" name="message" rows="3" placeholder=" "></textarea>
+                                    <label for="message">Special Requests (Optional)</label>
+                                    <span class="form-line"></span>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-full">
+                                    <span>Reserve Now</span>
+                                    <div class="btn-loading">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-map animate-on-scroll">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.0!2d93.9368!3d24.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQ4JzAwLjAiTiA5M8KwNTYnMTIuNSJF!5e0!3m2!1sen!2sin!4v1234567890"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <div class="map-overlay">
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-primary">
+                        <span>Get Directions</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content animate-on-scroll">
+                    <div class="newsletter-text">
+                        <h3>Stay in the loop</h3>
+                        <p>Get updates on new menu items, events, and special offers</p>
+                    </div>
+                    <form class="newsletter-form" id="newsletter-form">
+                        <div class="newsletter-input-wrapper">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit" class="btn btn-primary">
+                                <span>Subscribe</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#home" class="footer-logo">
+                        <span class="logo-text">eatcha</span>
+                        <span class="logo-dot"></span>
+                    </a>
+                    <p>Where every bite tells a story. Artisan coffee, handcrafted drinks, and freshly baked delights.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Our Menu</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Hours</h4>
+                    <ul>
+                        <li>Mon - Sat: 10AM - 9PM</li>
+                        <li>Sunday: 11AM - 8PM</li>
+                        <li>Holidays: Check Instagram</li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul class="footer-social">
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">WhatsApp</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Eatcha Cafe. Crafted with ❤️ in Imphal</p>
+                <p class="footer-credit">
+                    <a href="#home">Back to top ↑</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <button class="lightbox-next" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-message"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+        import { getDatabase, ref, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvV0sIWr9uTecT6fV5MjKC6rt2c0PCcxs",
+            authDomain: "eatchaweb.firebaseapp.com",
+            projectId: "eatchaweb",
+            storageBucket: "eatchaweb.firebasestorage.app",
+            messagingSenderId: "590586451060",
+            appId: "1:590586451060:web:f4e43ee2596633c7f32d21",
+            measurementId: "G-C3H1YYJGGN",
+            databaseURL: "https://eatchaweb-default-rtdb.firebaseio.com"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        // Make Firebase available globally
+        window.firebaseDB = database;
+        window.firebaseRef = ref;
+        window.firebasePush = push;
+        window.firebaseSet = set;
+
+        console.log('🔥 Firebase initialized');
+    </script>
+
+    <!-- FormSubmit.co handles email sending - no additional scripts needed! -->
+
+    <script src="main.js"></script>
+</body>
 </html>
