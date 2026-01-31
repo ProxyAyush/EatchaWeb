@@ -648,11 +648,14 @@
             btn.classList.add('loading');
 
             try {
-                // Save to Firebase Realtime Database
-                if (window.firebaseDB && window.firebaseRef && window.firebasePush) {
-                    const reservationsRef = window.firebaseRef(window.firebaseDB, 'EatchaMain/reservations');
-                    await window.firebasePush(reservationsRef, formData);
-                    console.log('✅ Reservation saved to Firebase');
+                // Save to Firestore under EatchaMain collection
+                if (window.firebaseDB && window.firestoreCollection && window.firestoreAddDoc) {
+                    const reservationsRef = window.firestoreCollection(window.firebaseDB, 'EatchaMain', 'data', 'reservations');
+                    await window.firestoreAddDoc(reservationsRef, {
+                        ...formData,
+                        createdAt: window.firestoreTimestamp()
+                    });
+                    console.log('✅ Reservation saved to Firestore (EatchaMain/reservations)');
                 }
 
                 // Send email notification using EmailJS
@@ -688,15 +691,15 @@
             btn.classList.add('loading');
 
             try {
-                // Save to Firebase Realtime Database
-                if (window.firebaseDB && window.firebaseRef && window.firebasePush) {
-                    const newsletterRef = window.firebaseRef(window.firebaseDB, 'EatchaMain/newsletter');
-                    await window.firebasePush(newsletterRef, {
+                // Save to Firestore under EatchaMain collection
+                if (window.firebaseDB && window.firestoreCollection && window.firestoreAddDoc) {
+                    const newsletterRef = window.firestoreCollection(window.firebaseDB, 'EatchaMain', 'data', 'newsletter');
+                    await window.firestoreAddDoc(newsletterRef, {
                         email: email,
-                        subscribedAt: new Date().toISOString(),
+                        subscribedAt: window.firestoreTimestamp(),
                         active: true
                     });
-                    console.log('✅ Newsletter subscription saved to Firebase');
+                    console.log('✅ Newsletter subscription saved to Firestore (EatchaMain/newsletter)');
                 }
 
                 btn.classList.remove('loading');
@@ -740,18 +743,18 @@
                 console.log('📧 Email service error:', error.message);
             }
 
-            // Also save to Firebase as backup
-            if (window.firebaseDB && window.firebaseRef && window.firebasePush) {
-                const emailQueueRef = window.firebaseRef(window.firebaseDB, 'EatchaMain/emailQueue');
-                await window.firebasePush(emailQueueRef, {
+            // Also save to Firestore under EatchaMain as backup
+            if (window.firebaseDB && window.firestoreCollection && window.firestoreAddDoc) {
+                const emailQueueRef = window.firestoreCollection(window.firebaseDB, 'EatchaMain', 'data', 'emailQueue');
+                await window.firestoreAddDoc(emailQueueRef, {
                     to: 'calmcup2348@gmail.com',
                     subject: `New ${data.type} - Eatcha Cafe`,
                     body: `New ${data.type} received!\n\nName: ${data.name}\nPhone: ${data.phone}\nDate: ${data.date || 'N/A'}\nTime: ${data.time || 'N/A'}\nGuests: ${data.guests || 'N/A'}\nMessage: ${data.message || 'None'}`,
                     data: data,
-                    createdAt: new Date().toISOString(),
+                    createdAt: window.firestoreTimestamp(),
                     sent: true
                 });
-                console.log('📧 Email record saved to Firebase');
+                console.log('📧 Email record saved to Firestore (EatchaMain/emailQueue)');
             }
         }
     };
