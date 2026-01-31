@@ -227,6 +227,12 @@
         init() {
             DOM.hamburger.addEventListener('click', this.toggle.bind(this));
 
+            // Close button
+            const closeBtn = document.getElementById('mobile-menu-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', this.close.bind(this));
+            }
+
             // Close menu on link click
             DOM.navLinks.forEach(link => {
                 link.addEventListener('click', () => {
@@ -239,6 +245,13 @@
             // Close menu on escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && DOM.mobileMenu.classList.contains('active')) {
+                    this.close();
+                }
+            });
+
+            // Close menu when clicking on background
+            DOM.mobileMenu?.addEventListener('click', (e) => {
+                if (e.target === DOM.mobileMenu || e.target.classList.contains('mobile-menu-bg')) {
                     this.close();
                 }
             });
@@ -355,27 +368,12 @@
     };
 
     // ==========================================================================
-    // Particles
+    // Particles (Disabled for cleaner look)
     // ==========================================================================
     const Particles = {
         init() {
-            if (!DOM.heroParticles) return;
-
-            for (let i = 0; i < CONFIG.particleCount; i++) {
-                this.createParticle();
-            }
-        },
-
-        createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            particle.style.animationDelay = `${Math.random() * 10}s`;
-            particle.style.animationDuration = `${8 + Math.random() * 4}s`;
-            particle.style.opacity = Math.random() * 0.6 + 0.2;
-            particle.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
-            DOM.heroParticles.appendChild(particle);
+            // Particles disabled for cleaner, calmer aesthetic
+            return;
         }
     };
 
